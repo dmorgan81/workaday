@@ -8,7 +8,9 @@
   "private": true,
   "dependencies": {
     "enamel": "^1.2.4",
-    "pebble-events": "^1.2.0"
+    "pebble-connection-vibes": "^1.0.2",
+    "pebble-events": "^1.2.0",
+    "pebble-hourly-vibes": "^1.0.2"
   },
   "pebble": {
     "displayName": "Workaday",
