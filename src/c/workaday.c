@@ -2,6 +2,7 @@
 #include <pebble-events/pebble-events.h>
 #include <pebble-connection-vibes/connection-vibes.h>
 #include <pebble-hourly-vibes/hourly-vibes.h>
+#include <lazy-fonts/lazy-fonts.h>
 #include "logging.h"
 #include "enamel.h"
 #include "colors.h"
@@ -61,6 +62,7 @@ static void init(void) {
         .durations = pattern,
         .num_segments = 1
     });
+    lazy_fonts_init();
 
 #ifdef PBL_HEALTH
     connection_vibes_enable_health(true);
@@ -81,6 +83,7 @@ static void deinit(void) {
     log_func();
     window_destroy(s_window);
 
+    lazy_fonts_deinit();
     hourly_vibes_deinit();
     connection_vibes_deinit();
     enamel_deinit();

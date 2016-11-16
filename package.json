@@ -7,7 +7,9 @@
   ],
   "private": true,
   "dependencies": {
+    "@smallstoneapps/sliding-text-layer": "file:///home/david/code/pebble/sliding-text-layer",
     "enamel": "^1.2.4",
+    "lazy-fonts": "^1.0.2",
     "pebble-connection-vibes": "^1.0.2",
     "pebble-events": "^1.2.0",
     "pebble-fctx": "^1.6.2",
@@ -40,6 +42,26 @@
           "type": "raw",
           "name": "GILROY_LIGHT_FFONT",
           "file": "fonts/Gilroy-Light.ffont"
+        },
+        {
+          "type": "font",
+          "name": "GILROY_LIGHT_18",
+          "file": "fonts/Gilroy-Light.otf",
+          "characterRegex": "[0-9a-zA-Z %.]",
+          "targetPlatforms": [
+            "aplite",
+            "basalt",
+            "diorite"
+          ]
+        },
+        {
+          "type": "font",
+          "name": "GILROY_LIGHT_26",
+          "file": "fonts/Gilroy-Light.otf",
+          "characterRegex": "[0-9a-zA-Z %.]",
+          "targetPlatforms": [
+            "emery"
+          ]
         }
       ]
     }
