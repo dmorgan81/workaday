@@ -73,6 +73,11 @@
           "file": "data/BATTERY.pdc",
           "name": "BATTERY",
           "type": "raw"
+        },
+        {
+          "file": "data/HEALTH_STEPS.pdc",
+          "name": "HEALTH_STEPS",
+          "type": "raw"
         }
       ]
     }

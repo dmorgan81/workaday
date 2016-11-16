@@ -5,8 +5,6 @@
 #include "colors.h"
 #include "battery-layer.h"
 
-static const uint8_t MARGIN_LEFT = 3;
-
 typedef struct __attribute__((packed)) {
     GDrawCommandImage *battery_pdc;
     GDrawCommandImage *battery_charging_pdc;
