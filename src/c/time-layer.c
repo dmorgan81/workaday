@@ -8,7 +8,8 @@
 typedef struct __attribute__((packed)) {
     char buf[6];
     FFont *font;
-    EventHandle tick_timer_event_handler;
+    EventHandle settings_event_handle;
+    EventHandle tick_timer_event_handle;
 } Data;
 
 static void update_proc(Layer *this, GContext *ctx) {
@@ -25,11 +26,11 @@ static void update_proc(Layer *this, GContext *ctx) {
 
     fixed_t str_width;
     do {
-        fctx_set_text_em_height(&fctx, data->font, font_size++);
+        fctx_set_text_em_height(&fctx, data->font, font_size--);
         str_width = fctx_string_width(&fctx, data->buf, data->font);
     } while (str_width > width);
 
-    fctx_set_text_em_height(&fctx, data->font, --font_size);
+    fctx_set_text_em_height(&fctx, data->font, ++font_size);
     fctx_set_color_bias(&fctx, 0);
     fctx_set_fill_color(&fctx, colors_get_foreground_color());
     fctx_set_offset(&fctx, center);
@@ -52,6 +53,12 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed, void *th
     layer_mark_dirty(this);
 }
 
+static void settings_handler(void *this) {
+    log_func();
+    time_t now = time(NULL);
+    tick_handler(localtime(&now), MINUTE_UNIT, this);
+}
+
 TimeLayer *time_layer_create(GRect frame) {
     log_func();
     TimeLayer *this = layer_create_with_data(frame, sizeof(Data));
@@ -60,9 +67,9 @@ TimeLayer *time_layer_create(GRect frame) {
 
     data->font = ffont_create_from_resource(RESOURCE_ID_GILROY_LIGHT_FFONT);
 
-    time_t now = time(NULL);
-    tick_handler(localtime(&now), MINUTE_UNIT, this);
-    data->tick_timer_event_handler = events_tick_timer_service_subscribe_context(MINUTE_UNIT, tick_handler, this);
+    settings_handler(this);
+    data->settings_event_handle = enamel_settings_received_subscribe(settings_handler, this);
+    data->tick_timer_event_handle = events_tick_timer_service_subscribe_context(MINUTE_UNIT, tick_handler, this);
 
     return this;
 }
@@ -70,7 +77,8 @@ TimeLayer *time_layer_create(GRect frame) {
 void time_layer_destroy(TimeLayer *this) {
     log_func();
     Data *data = layer_get_data(this);
-    events_tick_timer_service_unsubscribe(data->tick_timer_event_handler);
+    events_tick_timer_service_unsubscribe(data->tick_timer_event_handle);
+    enamel_settings_received_unsubscribe(data->settings_event_handle);
     ffont_destroy(data->font);
     layer_destroy(this);
 }
