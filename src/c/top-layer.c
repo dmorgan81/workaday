@@ -5,10 +5,12 @@
 #include "top-layer.h"
 #include "connection-layer.h"
 #include "date-layer.h"
+#include "battery-layer.h"
 
 typedef struct __attribute__((packed)) {
     ConnectionLayer *connection_layer;
     DateLayer *date_layer;
+    BatteryLayer *battery_layer;
 } Data;
 
 static inline uint8_t get_height(void) {
@@ -31,12 +33,16 @@ TopLayer *top_layer_create(GRect frame) {
     layer_set_update_proc(this, update_proc);
     Data *data = layer_get_data(this);
     GRect bounds = layer_get_bounds(this);
+    uint8_t width = bounds.size.w / 2;
 
-    data->connection_layer = connection_layer_create(GRect(0, 0, bounds.size.w, get_height()));
+    data->connection_layer = connection_layer_create(GRect(0, 0, width, get_height()));
     layer_add_child(this, data->connection_layer);
 
-    data->date_layer = date_layer_create(GRect(0, 0, bounds.size.w / 2 - 4, get_height()));
+    data->date_layer = date_layer_create(GRect(0, 0, width - 4, get_height()));
     layer_add_child(this, data->date_layer);
+
+    data->battery_layer = battery_layer_create(GRect(width + 4, 0, width - 4, get_height()));
+    layer_add_child(this, data->battery_layer);
 
     return this;
 }
@@ -44,6 +50,7 @@ TopLayer *top_layer_create(GRect frame) {
 void top_layer_destroy(TopLayer *this) {
     log_func();
     Data *data = layer_get_data(this);
+    battery_layer_destroy(data->battery_layer);
     date_layer_destroy(data->date_layer);
     connection_layer_destroy(data->connection_layer);
     layer_destroy(this);
