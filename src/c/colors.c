@@ -1,6 +1,4 @@
-#include <pebble.h>
-#include "logging.h"
-#include "enamel.h"
+#include "common.h"
 #include "colors.h"
 
 GColor colors_get_background_color(void) {

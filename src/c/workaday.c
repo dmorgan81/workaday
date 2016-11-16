@@ -1,10 +1,8 @@
-#include <pebble.h>
+#include "common.h"
 #include <pebble-events/pebble-events.h>
 #include <pebble-connection-vibes/connection-vibes.h>
 #include <pebble-hourly-vibes/hourly-vibes.h>
 #include <lazy-fonts/lazy-fonts.h>
-#include "logging.h"
-#include "enamel.h"
 #include "colors.h"
 
 #include "time-layer.h"

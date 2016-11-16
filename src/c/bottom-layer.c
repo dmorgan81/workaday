@@ -1,6 +1,4 @@
-#include <pebble.h>
-#include "logging.h"
-#include "enamel.h"
+#include "common.h"
 #include "colors.h"
 #include "bottom-layer.h"
 
@@ -10,8 +8,7 @@ typedef struct __attribute__((packed)) {
 static void update_proc(Layer *this, GContext *ctx) {
     log_func();
     GRect bounds = layer_get_unobstructed_bounds(this);
-    PreferredContentSize content_size = preferred_content_size();
-    uint8_t y = bounds.size.h - (content_size == PreferredContentSizeMedium ? 34 : 46);
+    uint8_t y = bounds.size.h - PBL_IF_DISPLAY_LARGE_ELSE(46, 34);
 
     graphics_context_set_stroke_color(ctx, colors_get_foreground_color());
     graphics_draw_line(ctx, GPoint(0, y), GPoint(bounds.size.w, y));

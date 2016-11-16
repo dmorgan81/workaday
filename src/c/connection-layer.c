@@ -1,14 +1,11 @@
-#include <pebble.h>
+#include "common.h"
 #include <pebble-events/pebble-events.h>
-#include "logging.h"
-#include "enamel.h"
 #include "colors.h"
 #include "connection-layer.h"
 
-
 static const GPathInfo PATH_INFO = {
     .num_points = 7,
-#ifdef PBL_PLATFORM_EMERY
+#ifdef PBL_DISPLAY_LARGE
     .points = (GPoint []) {{0, 10}, {13, 23}, {6, 29}, {6, 4}, {13, 10}, {0, 23}, {6, 17}}
 #else
     .points = (GPoint []) {{0, 7}, {8, 15}, {4, 19}, {4, 3}, {8, 7}, {0, 15}, {4, 11}}

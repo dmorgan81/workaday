@@ -1,9 +1,7 @@
-#include <pebble.h>
+#include "common.h"
 #include <pebble-events/pebble-events.h>
 #include <@smallstoneapps/sliding-text-layer/sliding-text-layer.h>
 #include <lazy-fonts/lazy-fonts.h>
-#include "logging.h"
-#include "enamel.h"
 #include "colors.h"
 #include "date-layer.h"
 
@@ -58,11 +56,7 @@ DateLayer *date_layer_create(GRect frame) {
     GRect bounds = layer_get_bounds(this);
 
     data->text_layer = sliding_text_layer_create(bounds);
-#ifdef PBL_PLATFORM_EMERY
-    sliding_text_layer_set_font(data->text_layer, lazy_fonts_get(RESOURCE_ID_GILROY_LIGHT_26));
-#else
-    sliding_text_layer_set_font(data->text_layer, lazy_fonts_get(RESOURCE_ID_GILROY_LIGHT_18));
-#endif
+    sliding_text_layer_set_font(data->text_layer, lazy_fonts_get(PBL_IF_DISPLAY_LARGE_ELSE(RESOURCE_ID_GILROY_LIGHT_26, RESOURCE_ID_GILROY_LIGHT_18)));
     sliding_text_layer_set_text_alignment(data->text_layer, GTextAlignmentRight);
     sliding_text_layer_set_text(data->text_layer, data->buf_date);
     sliding_text_layer_set_duration(data->text_layer, 500);

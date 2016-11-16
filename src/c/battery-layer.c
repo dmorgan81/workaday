@@ -1,10 +1,8 @@
-#include <pebble.h>
+#include "common.h"
 #include <pebble-events/pebble-events.h>
 #include <pdc-transform/pdc-transform.h>
 #include <lazy-fonts/lazy-fonts.h>
-#include "logging.h"
 #include "colors.h"
-#include "enamel.h"
 #include "battery-layer.h"
 
 static const uint8_t MARGIN_LEFT = 3;
@@ -25,11 +23,7 @@ static void update_proc(Layer *this, GContext *ctx) {
     Data *data = layer_get_data(this);
 
     GSize size = gdraw_command_image_get_bounds_size(data->battery_pdc);
-#ifdef PBL_PLATFORM_EMERY
-    GPoint offset = GPoint(bounds.size.w - size.w, 1);
-#else
-    GPoint offset = GPoint(bounds.size.w - size.w, 0);
-#endif
+    GPoint offset = GPoint(bounds.size.w - size.w, PBL_IF_DISPLAY_LARGE_ELSE(1, 0));
     gdraw_command_image_draw(ctx, data->battery_pdc, offset);
 
     if (data->state.is_charging) {
@@ -46,7 +40,7 @@ static void update_proc(Layer *this, GContext *ctx) {
 #endif
         graphics_context_set_fill_color(ctx, color);
 
-#ifdef PBL_PLATFORM_EMERY
+#ifdef PBL_DISPLAY_LARGE
         int w = 25 * percent / 100;
         graphics_fill_rect(ctx, GRect(offset.x + 3, offset.y + 10, w, 11), 0, GCornerNone);
 #else
@@ -83,7 +77,7 @@ BatteryLayer *battery_layer_create(GRect frame) {
     data->battery_pdc = gdraw_command_image_create_with_resource(RESOURCE_ID_BATTERY);
     data->battery_charging_pdc = gdraw_command_image_create_with_resource(RESOURCE_ID_BATTERY_CHARGING);
 
-#ifdef PBL_PLATFORM_EMERY
+#ifdef PBL_DISPLAY_LARGE
     pdc_transform_scale_image(data->battery_pdc, 13);
     pdc_transform_scale_image(data->battery_charging_pdc, 13);
 #endif
@@ -91,11 +85,7 @@ BatteryLayer *battery_layer_create(GRect frame) {
     GSize size = gdraw_command_image_get_bounds_size(data->battery_pdc);
     GRect rect = GRect(0, 0, bounds.size.w - size.w - 2, bounds.size.h);
     data->text_layer = text_layer_create(rect);
-#ifdef PBL_PLATFORM_EMERY
-    text_layer_set_font(data->text_layer, lazy_fonts_get(RESOURCE_ID_GILROY_LIGHT_26));
-#else
-    text_layer_set_font(data->text_layer, lazy_fonts_get(RESOURCE_ID_GILROY_LIGHT_18));
-#endif
+    text_layer_set_font(data->text_layer, lazy_fonts_get(PBL_IF_DISPLAY_LARGE_ELSE(RESOURCE_ID_GILROY_LIGHT_26, RESOURCE_ID_GILROY_LIGHT_18)));
     text_layer_set_background_color(data->text_layer, GColorClear);
     text_layer_set_text_alignment(data->text_layer, GTextAlignmentRight);
     text_layer_set_text(data->text_layer, data->buf);

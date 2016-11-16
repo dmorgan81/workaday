@@ -1,6 +1,4 @@
-#include <pebble.h>
-#include "logging.h"
-#include "enamel.h"
+#include "common.h"
 #include "colors.h"
 #include "top-layer.h"
 #include "connection-layer.h"
@@ -13,14 +11,10 @@ typedef struct __attribute__((packed)) {
     BatteryLayer *battery_layer;
 } Data;
 
-static inline uint8_t get_height(void) {
-    return preferred_content_size() == PreferredContentSizeMedium ? 28 : 38;
-}
-
 static void update_proc(Layer *this, GContext *ctx) {
     log_func();
     GRect bounds = layer_get_bounds(this);
-    uint8_t height = get_height();
+    uint8_t height = PBL_IF_DISPLAY_LARGE_ELSE(38, 28);
 
     graphics_context_set_stroke_color(ctx, colors_get_foreground_color());
     graphics_draw_line(ctx, GPoint(0, height), GPoint(bounds.size.w, height));
@@ -34,14 +28,15 @@ TopLayer *top_layer_create(GRect frame) {
     Data *data = layer_get_data(this);
     GRect bounds = layer_get_bounds(this);
     uint8_t width = bounds.size.w / 2;
+    uint8_t height = PBL_IF_DISPLAY_LARGE_ELSE(38, 28);
 
-    data->connection_layer = connection_layer_create(GRect(0, 0, width, get_height()));
+    data->connection_layer = connection_layer_create(GRect(0, 0, width, height));
     layer_add_child(this, data->connection_layer);
 
-    data->date_layer = date_layer_create(GRect(0, 0, width - 4, get_height()));
+    data->date_layer = date_layer_create(GRect(0, 0, width - 4, height));
     layer_add_child(this, data->date_layer);
 
-    data->battery_layer = battery_layer_create(GRect(width + 4, 0, width - 4, get_height()));
+    data->battery_layer = battery_layer_create(GRect(width + 4, 0, width - 4, height));
     layer_add_child(this, data->battery_layer);
 
     return this;

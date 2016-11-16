@@ -1,9 +1,7 @@
-#include <pebble.h>
+#include "common.h"
 #include <pebble-events/pebble-events.h>
 #include <pebble-fctx/fctx.h>
 #include <pebble-fctx/ffont.h>
-#include "logging.h"
-#include "enamel.h"
 #include "colors.h"
 #include "time-layer.h"
 
@@ -17,11 +15,10 @@ static void update_proc(Layer *this, GContext *ctx) {
     log_func();
     Data *data = layer_get_data(this);
     GRect bounds = layer_get_unobstructed_bounds(this);
-    PreferredContentSize content_size = preferred_content_size();
-    FPoint center = FPointI(bounds.size.w / 2, bounds.size.h / 2 - (content_size == PreferredContentSizeMedium ? 5 : 7));
+    FPoint center = FPointI(bounds.size.w / 2, bounds.size.h / 2 - PBL_IF_DISPLAY_LARGE_ELSE(7, 5));
     fixed_t width = INT_TO_FIXED(bounds.size.w);
 
-    int16_t font_size = content_size == PreferredContentSizeMedium ? 60 : 80;
+    int16_t font_size = PBL_IF_DISPLAY_LARGE_ELSE(80, 60);
 
     FContext fctx;
     fctx_init_context(&fctx, ctx);
