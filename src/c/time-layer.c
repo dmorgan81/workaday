@@ -17,10 +17,10 @@ static void update_proc(Layer *this, GContext *ctx) {
     log_func();
     Data *data = layer_get_data(this);
     GRect bounds = layer_get_unobstructed_bounds(this);
-    FPoint center = FPointI(bounds.size.w / 2, bounds.size.h / 2);
+    PreferredContentSize content_size = preferred_content_size();
+    FPoint center = FPointI(bounds.size.w / 2, bounds.size.h / 2 - (content_size == PreferredContentSizeMedium ? 5 : 7));
     fixed_t width = INT_TO_FIXED(bounds.size.w);
 
-    PreferredContentSize content_size = preferred_content_size();
     int16_t font_size = content_size == PreferredContentSizeMedium ? 60 : 80;
 
     FContext fctx;

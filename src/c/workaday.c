@@ -7,9 +7,13 @@
 #include "colors.h"
 
 #include "time-layer.h"
+#include "top-layer.h"
+#include "bottom-layer.h"
 
 static Window *s_window;
 static TimeLayer *s_time_layer;
+static TopLayer *s_top_layer;
+static BottomLayer *s_bottom_layer;
 
 static EventHandle s_settings_event_handle;
 
@@ -28,6 +32,12 @@ static void window_load(Window *window) {
     s_time_layer = time_layer_create(bounds);
     layer_add_child(root_layer, s_time_layer);
 
+    s_top_layer = top_layer_create(bounds);
+    layer_add_child(root_layer, s_top_layer);
+
+    s_bottom_layer = bottom_layer_create(bounds);
+    layer_add_child(root_layer, s_bottom_layer);
+
     settings_handler(NULL);
     s_settings_event_handle = enamel_settings_received_subscribe(settings_handler, NULL);
 }
@@ -36,6 +46,8 @@ static void window_unload(Window *window) {
     log_func();
     enamel_settings_received_unsubscribe(s_settings_event_handle);
 
+    bottom_layer_destroy(s_bottom_layer);
+    top_layer_destroy(s_top_layer);
     time_layer_destroy(s_time_layer);
 }
 
