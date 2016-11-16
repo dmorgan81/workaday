@@ -2,9 +2,14 @@
   "name": "workaday",
   "author": "David Morgan",
   "version": "2.0.0",
-  "keywords": ["pebble-app"],
+  "keywords": [
+    "pebble-app"
+  ],
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "enamel": "^1.2.4",
+    "pebble-events": "^1.2.0"
+  },
   "pebble": {
     "displayName": "Workaday",
     "uuid": "b5ae4652-2986-4756-a22b-718d3b4a985b",
@@ -19,7 +24,13 @@
     "watchapp": {
       "watchface": true
     },
-    "messageKeys": [],
+    "messageKeys": [
+      "LEADING_ZERO",
+      "COLOR_BACKGROUND",
+      "COLOR_INVERT",
+      "HOURLY_VIBE",
+      "CONNECTION_VIBE"
+    ],
     "resources": {
       "media": []
     }

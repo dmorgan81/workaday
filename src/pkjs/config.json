@@ -1,0 +1,59 @@
+[
+    {
+        "type": "section",
+        "items": [
+            {
+                "type": "toggle",
+                "messageKey": "LEADING_ZERO",
+                "label": "Leading Zero",
+                "defaultValue": true
+            },
+            {
+                "type": "color",
+                "messageKey": "COLOR_BACKGROUND",
+                "label": "Background",
+                "defaultValue": "000000",
+                "sunlight": false,
+                "capabilities": [ "COLOR" ]
+            },
+            {
+                "type": "toggle",
+                "messageKey": "COLOR_INVERT",
+                "label": "Invert Colors",
+                "description": "White on black, or black on white",
+                "defaultValue": true,
+                "capabilities": [ "BW" ]
+            },
+            {
+                "type": "toggle",
+                "messageKey": "HOURLY_VIBE",
+                "label": "Vibrate on the Hour",
+                "defaultValue": true
+            },
+            {
+                "type": "radiogroup",
+                "messageKey": "CONNECTION_VIBE",
+                "label": "Bluetooth Vibrate",
+                "defaultValue": "1",
+                "options": [
+                    {
+                        "label": "On Disconnect",
+                        "value": "1"
+                    },
+                    {
+                        "label": "On Disconnect & Reconnect",
+                        "value": "2"
+                    },
+                    {
+                        "label": "Neither",
+                        "value": "0"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "submit",
+        "defaultValue": "Save"
+    }
+]
