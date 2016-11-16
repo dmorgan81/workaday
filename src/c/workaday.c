@@ -6,7 +6,10 @@
 #include "enamel.h"
 #include "colors.h"
 
+#include "time-layer.h"
+
 static Window *s_window;
+static TimeLayer *s_time_layer;
 
 static EventHandle s_settings_event_handle;
 
@@ -19,6 +22,12 @@ static void settings_handler(void *context) {
 
 static void window_load(Window *window) {
     log_func();
+    Layer *root_layer = window_get_root_layer(window);
+    GRect bounds = layer_get_bounds(root_layer);
+
+    s_time_layer = time_layer_create(bounds);
+    layer_add_child(root_layer, s_time_layer);
+
     settings_handler(NULL);
     s_settings_event_handle = enamel_settings_received_subscribe(settings_handler, NULL);
 }
@@ -26,6 +35,8 @@ static void window_load(Window *window) {
 static void window_unload(Window *window) {
     log_func();
     enamel_settings_received_unsubscribe(s_settings_event_handle);
+
+    time_layer_destroy(s_time_layer);
 }
 
 static void init(void) {

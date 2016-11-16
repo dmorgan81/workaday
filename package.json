@@ -10,6 +10,7 @@
     "enamel": "^1.2.4",
     "pebble-connection-vibes": "^1.0.2",
     "pebble-events": "^1.2.0",
+    "pebble-fctx": "^1.6.2",
     "pebble-hourly-vibes": "^1.0.2"
   },
   "pebble": {
@@ -34,7 +35,16 @@
       "CONNECTION_VIBE"
     ],
     "resources": {
-      "media": []
+      "media": [
+        {
+          "type": "raw",
+          "name": "GILROY_LIGHT_FFONT",
+          "file": "fonts/Gilroy-Light.ffont"
+        }
+      ]
     }
+  },
+  "devDependencies": {
+    "pebble-fctx-compiler": "^1.2.1"
   }
 }
