@@ -3,9 +3,11 @@
 #include "enamel.h"
 #include "colors.h"
 #include "top-layer.h"
+#include "connection-layer.h"
 #include "date-layer.h"
 
 typedef struct __attribute__((packed)) {
+    ConnectionLayer *connection_layer;
     DateLayer *date_layer;
 } Data;
 
@@ -30,6 +32,9 @@ TopLayer *top_layer_create(GRect frame) {
     Data *data = layer_get_data(this);
     GRect bounds = layer_get_bounds(this);
 
+    data->connection_layer = connection_layer_create(GRect(0, 0, bounds.size.w, get_height()));
+    layer_add_child(this, data->connection_layer);
+
     data->date_layer = date_layer_create(GRect(0, 0, bounds.size.w / 2 - 4, get_height()));
     layer_add_child(this, data->date_layer);
 
@@ -40,5 +45,6 @@ void top_layer_destroy(TopLayer *this) {
     log_func();
     Data *data = layer_get_data(this);
     date_layer_destroy(data->date_layer);
+    connection_layer_destroy(data->connection_layer);
     layer_destroy(this);
 }
