@@ -1,3 +1,4 @@
+#ifndef PBL_PLATFORM_APLITE
 #include <pebble-events/pebble-events.h>
 #include <pebble-geocode-mapquest/pebble-geocode-mapquest.h>
 #include <@smallstoneapps/linked-list/linked-list.h>
@@ -11,12 +12,12 @@ static const uint32_t PERSIST_KEY_GEOCODE_COORDINATES = 3;
 #define GEOCODE_API_KEY ""
 #endif
 
-typedef struct {
+typedef struct __attribute__((packed)) {
     EventGeocodeHandler handler;
     void *context;
 } GeocodeHandlerState;
 
-typedef struct {
+typedef struct __attribute__((packed)) {
     GeocodeMapquestCoordinates *coordinates;
     GeocodeMapquestStatus status;
 } GeocodeBundle;
@@ -88,3 +89,4 @@ void events_geocode_unsubscribe(EventHandle handle) {
     free(linked_list_get(s_handler_list, index));
     linked_list_remove(s_handler_list, index);
 }
+#endif

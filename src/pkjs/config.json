@@ -131,12 +131,18 @@
                 "type": "toggle",
                 "messageKey": "USE_GPS",
                 "label": "Use GPS",
-                "defaultValue": true
+                "defaultValue": true,
+                "capabilities": [
+                    "NOT_PLATFORM_APLITE"
+                ]
             },
             {
                 "type": "input",
                 "messageKey": "LOCATION_NAME",
-                "label": "Location"
+                "label": "Location",
+                "capabilities": [
+                    "NOT_PLATFORM_APLITE"
+                ]
             },
             {
                 "type": "input",
