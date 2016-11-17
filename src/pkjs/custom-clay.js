@@ -40,7 +40,7 @@ module.exports = function(minified) {
                         masterKeyText.set('Could not fetch Master Key');
                         masterKeyText.show();
                     }
-                }).fail(function() {
+                }).error(function() {
                     masterKeyEmail.disable();
                     masterKeyPin.disable();
                     masterKeyButton.disable();
@@ -48,6 +48,14 @@ module.exports = function(minified) {
                     masterKeyText.show();
                 });
             } else if (masterKey && masterKey.success && masterKey.keys.weather) {
+                var weather = masterKey.keys.weather;
+                var provider = providers[weatherProvider.get()];
+                if (provider) weatherKey.set(weather[provider]);
+            }
+        });
+
+        weatherProvider.on('change', function() {
+            if (masterKey) {
                 var weather = masterKey.keys.weather;
                 var provider = providers[weatherProvider.get()];
                 if (provider) weatherKey.set(weather[provider]);

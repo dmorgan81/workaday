@@ -14,7 +14,7 @@
     "pebble-connection-vibes": "^1.0.2",
     "pebble-events": "^1.2.0",
     "pebble-fctx": "^1.6.2",
-    "pebble-generic-weather": "^1.1.6",
+    "pebble-generic-weather": "file:///home/david/code/pebble/pebble-generic-weather",
     "pebble-geocode-mapquest": "^1.0.2",
     "pebble-hourly-vibes": "^1.0.2"
   },
