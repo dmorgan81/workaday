@@ -21,7 +21,7 @@ static void update_proc(Layer *this, GContext *ctx) {
     Data *data = layer_get_data(this);
 
     GSize size = gdraw_command_image_get_bounds_size(data->battery_pdc);
-    GPoint offset = GPoint(bounds.size.w - size.w, PBL_IF_DISPLAY_LARGE_ELSE(1, 0));
+    GPoint offset = GPoint(bounds.size.w - size.w, PBL_IF_DISPLAY_LARGE_ELSE(2, 1));
     gdraw_command_image_draw(ctx, data->battery_pdc, offset);
 
     if (data->state.is_charging) {
@@ -81,7 +81,7 @@ BatteryLayer *battery_layer_create(GRect frame) {
 #endif
 
     GSize size = gdraw_command_image_get_bounds_size(data->battery_pdc);
-    GRect rect = GRect(0, 0, bounds.size.w - size.w - 2, bounds.size.h);
+    GRect rect = GRect(0, 1, bounds.size.w - size.w - 2, bounds.size.h - 1);
     data->text_layer = text_layer_create(rect);
     text_layer_set_font(data->text_layer, lazy_fonts_get(PBL_IF_DISPLAY_LARGE_ELSE(RESOURCE_ID_GILROY_LIGHT_26, RESOURCE_ID_GILROY_LIGHT_18)));
     text_layer_set_background_color(data->text_layer, GColorClear);

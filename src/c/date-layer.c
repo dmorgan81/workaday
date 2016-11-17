@@ -54,10 +54,10 @@ DateLayer *date_layer_create(GRect frame) {
     DateLayer *this = layer_create_with_data(frame, sizeof(Data));
     Data *data = layer_get_data(this);
     GRect bounds = layer_get_bounds(this);
+    uint8_t x = PBL_IF_DISPLAY_LARGE_ELSE(15, 10);
 
-    data->text_layer = sliding_text_layer_create(bounds);
+    data->text_layer = sliding_text_layer_create(GRect(x, 1, bounds.size.w - x, bounds.size.h - 1));
     sliding_text_layer_set_font(data->text_layer, lazy_fonts_get(PBL_IF_DISPLAY_LARGE_ELSE(RESOURCE_ID_GILROY_LIGHT_26, RESOURCE_ID_GILROY_LIGHT_18)));
-    sliding_text_layer_set_text_alignment(data->text_layer, GTextAlignmentRight);
     sliding_text_layer_set_text(data->text_layer, data->buf_date);
     sliding_text_layer_set_duration(data->text_layer, 500);
     layer_add_child(this, data->text_layer);

@@ -6,9 +6,9 @@
 static const GPathInfo PATH_INFO = {
     .num_points = 7,
 #ifdef PBL_DISPLAY_LARGE
-    .points = (GPoint []) {{0, 10}, {13, 23}, {6, 29}, {6, 4}, {13, 10}, {0, 23}, {6, 17}}
+    .points = (GPoint []) {{0, 11}, {13, 24}, {6, 30}, {6, 5}, {13, 11}, {0, 24}, {6, 18}}
 #else
-    .points = (GPoint []) {{0, 7}, {8, 15}, {4, 19}, {4, 3}, {8, 7}, {0, 15}, {4, 11}}
+    .points = (GPoint []) {{0, 8}, {8, 16}, {4, 20}, {4, 4}, {8, 8}, {0, 16}, {4, 12}}
 #endif
 };
 

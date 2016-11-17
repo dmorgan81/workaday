@@ -76,6 +76,7 @@ static void health_event_handler(HealthEventType event, void *context) {
     Data *data = layer_get_data(context);
 #ifdef DEMO
     snprintf(data->buf_steps, sizeof(data->buf_steps), "4.5k");
+    snprintf(data->buf_distance, sizeof(data->buf_distance), "3km");
     layer_mark_dirty(context);
     data->steps = PBL_IF_COLOR_ELSE(5, 6);
     data->goal = 10;
@@ -193,7 +194,7 @@ StepLayer *step_layer_create(GRect frame) {
 #endif
 
     GSize size = gdraw_command_image_get_bounds_size(data->steps_pdc);
-    GRect rect = GRect(0, 3, bounds.size.w - size.w - 2, bounds.size.h - 3);
+    GRect rect = GRect(0, 3, bounds.size.w - size.w - 2, PBL_IF_DISPLAY_LARGE_ELSE(26, 18));
     data->text_layer = sliding_text_layer_create(rect);
     sliding_text_layer_set_font(data->text_layer, lazy_fonts_get(PBL_IF_DISPLAY_LARGE_ELSE(RESOURCE_ID_GILROY_LIGHT_26, RESOURCE_ID_GILROY_LIGHT_18)));
     sliding_text_layer_set_text_alignment(data->text_layer, GTextAlignmentRight);
