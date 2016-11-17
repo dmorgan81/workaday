@@ -14,11 +14,10 @@ typedef struct __attribute__((packed)) {
 static void update_proc(Layer *this, GContext *ctx) {
     log_func();
     GRect bounds = layer_get_bounds(this);
-    uint8_t height = PBL_IF_DISPLAY_LARGE_ELSE(38, 28);
 
     graphics_context_set_stroke_color(ctx, colors_get_foreground_color());
-    graphics_draw_line(ctx, GPoint(0, height), GPoint(bounds.size.w, height));
-    graphics_draw_line(ctx, GPoint(bounds.size.w / 2, 0), GPoint(bounds.size.w / 2, height));
+    graphics_draw_line(ctx, GPoint(0, TOP_LAYER_HEIGHT - 1), GPoint(bounds.size.w, TOP_LAYER_HEIGHT - 1));
+    graphics_draw_line(ctx, GPoint(bounds.size.w / 2, 0), GPoint(bounds.size.w / 2, TOP_LAYER_HEIGHT));
 }
 
 TopLayer *top_layer_create(GRect frame) {
@@ -28,15 +27,14 @@ TopLayer *top_layer_create(GRect frame) {
     Data *data = layer_get_data(this);
     GRect bounds = layer_get_bounds(this);
     uint8_t width = bounds.size.w / 2;
-    uint8_t height = PBL_IF_DISPLAY_LARGE_ELSE(38, 28);
 
-    data->connection_layer = connection_layer_create(GRect(0, 0, width, height));
+    data->connection_layer = connection_layer_create(GRect(0, 0, width, TOP_LAYER_HEIGHT));
     layer_add_child(this, data->connection_layer);
 
-    data->date_layer = date_layer_create(GRect(0, 0, width - 4, height));
+    data->date_layer = date_layer_create(GRect(0, 0, width - 4, TOP_LAYER_HEIGHT));
     layer_add_child(this, data->date_layer);
 
-    data->battery_layer = battery_layer_create(GRect(width + 4, 0, width - 4, height));
+    data->battery_layer = battery_layer_create(GRect(width + 4, 0, width - 4, TOP_LAYER_HEIGHT));
     layer_add_child(this, data->battery_layer);
 
     return this;
