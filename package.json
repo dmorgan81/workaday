@@ -2,6 +2,7 @@
   "name": "workaday",
   "author": "David Morgan",
   "version": "2.0.0",
+  "license": "MIT",
   "keywords": [
     "pebble-app"
   ],
