@@ -10,7 +10,7 @@
     "@smallstoneapps/sliding-text-layer": "file:///home/david/code/pebble/sliding-text-layer",
     "enamel": "^1.2.4",
     "lazy-fonts": "^1.0.2",
-    "pdc-transform": "file:///home/david/code/pebble/pdc-transform",
+    "pdc-transform": "^2.0.4",
     "pebble-connection-vibes": "^1.0.2",
     "pebble-events": "^1.2.0",
     "pebble-fctx": "^1.6.2",
