@@ -14,6 +14,8 @@
     "pebble-connection-vibes": "^1.0.2",
     "pebble-events": "^1.2.0",
     "pebble-fctx": "^1.6.2",
+    "pebble-generic-weather": "^1.1.6",
+    "pebble-geocode-mapquest": "^1.0.2",
     "pebble-hourly-vibes": "^1.0.2"
   },
   "pebble": {
@@ -31,11 +33,18 @@
       "watchface": true
     },
     "messageKeys": [
+      "APP_READY",
       "LEADING_ZERO",
       "COLOR_BACKGROUND",
       "COLOR_INVERT",
       "HOURLY_VIBE",
-      "CONNECTION_VIBE"
+      "CONNECTION_VIBE",
+      "WEATHER_KEY",
+      "WEATHER_UNIT",
+      "WEATHER_INTERVAL",
+      "WEATHER_PROVIDER",
+      "USE_GPS",
+      "LOCATION_NAME"
     ],
     "resources": {
       "media": [
@@ -48,7 +57,18 @@
           "type": "font",
           "name": "GILROY_LIGHT_18",
           "file": "fonts/Gilroy-Light.otf",
-          "characterRegex": "[0-9a-zA-Z %.]",
+          "characterRegex": "[0-9a-zA-Z %.°]",
+          "targetPlatforms": [
+            "aplite",
+            "basalt",
+            "diorite"
+          ]
+        },
+        {
+          "type": "font",
+          "name": "GILROY_LIGHT_22",
+          "file": "fonts/Gilroy-Light.otf",
+          "characterRegex": "[0-9°\\-]",
           "targetPlatforms": [
             "aplite",
             "basalt",
@@ -59,7 +79,16 @@
           "type": "font",
           "name": "GILROY_LIGHT_26",
           "file": "fonts/Gilroy-Light.otf",
-          "characterRegex": "[0-9a-zA-Z %.]",
+          "characterRegex": "[0-9a-zA-Z %.°]",
+          "targetPlatforms": [
+            "emery"
+          ]
+        },
+        {
+          "type": "font",
+          "name": "GILROY_LIGHT_30",
+          "file": "fonts/Gilroy-Light.otf",
+          "characterRegex": "[0-9°\\-]",
           "targetPlatforms": [
             "emery"
           ]
@@ -77,6 +106,51 @@
         {
           "file": "data/HEALTH_STEPS.pdc",
           "name": "HEALTH_STEPS",
+          "type": "raw"
+        },
+        {
+          "file": "data/WEATHER_CLEAR_DAY.pdc",
+          "name": "WEATHER_CLEAR_DAY",
+          "type": "raw"
+        },
+        {
+          "file": "data/WEATHER_CLEAR_NIGHT.pdc",
+          "name": "WEATHER_CLEAR_NIGHT",
+          "type": "raw"
+        },
+        {
+          "file": "data/WEATHER_PARTLY_CLOUDY_DAY.pdc",
+          "name": "WEATHER_PARTLY_CLOUDY_DAY",
+          "type": "raw"
+        },
+        {
+          "file": "data/WEATHER_PARTLY_CLOUDY_NIGHT.pdc",
+          "name": "WEATHER_PARTLY_CLOUDY_NIGHT",
+          "type": "raw"
+        },
+        {
+          "file": "data/WEATHER_CLOUDY.pdc",
+          "name": "WEATHER_CLOUDY",
+          "type": "raw"
+        },
+        {
+          "file": "data/WEATHER_RAIN.pdc",
+          "name": "WEATHER_RAIN",
+          "type": "raw"
+        },
+        {
+          "file": "data/WEATHER_THUNDERSTORM.pdc",
+          "name": "WEATHER_THUNDERSTORM",
+          "type": "raw"
+        },
+        {
+          "file": "data/WEATHER_SNOW.pdc",
+          "name": "WEATHER_SNOW",
+          "type": "raw"
+        },
+        {
+          "file": "data/WEATHER_GENERIC.pdc",
+          "name": "WEATHER_GENERIC",
           "type": "raw"
         }
       ]

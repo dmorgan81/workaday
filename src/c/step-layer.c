@@ -92,6 +92,7 @@ static void health_event_handler(HealthEventType event, void *context) {
         } else {
             data->goal = 0;
         }
+        layer_mark_dirty(context);
     } else if (event == HealthEventMovementUpdate) {
         time_t start = time_start_of_today();
         time_t end = time(NULL);

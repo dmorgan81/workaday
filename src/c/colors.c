@@ -6,7 +6,7 @@ GColor colors_get_background_color(void) {
 #ifdef PBL_COLOR
     return enamel_get_COLOR_BACKGROUND();
 #else
-    return enamel_get_COLOR_INVERT() ? GColorWhite : GColorBlack;
+    return enamel_get_COLOR_INVERT() ? GColorBlack : GColorWhite;
 #endif
 }
 

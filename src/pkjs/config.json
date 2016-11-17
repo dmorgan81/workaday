@@ -53,6 +53,125 @@
         ]
     },
     {
+        "type": "section",
+        "items": [
+            {
+                "type": "heading",
+                "defaultValue": "Weather"
+            },
+            {
+                "type": "radiogroup",
+                "messageKey": "WEATHER_UNIT",
+                "label": "Unit",
+                "defaultValue": "0",
+                "options": [
+                    {
+                        "label": "Celsius",
+                        "value": "0"
+                    },
+                    {
+                        "label": "Fahrenheit",
+                        "value": "1"
+                    }
+                ]
+            },
+            {
+                "type": "select",
+                "messageKey": "WEATHER_INTERVAL",
+                "label": "Interval",
+                "defaultValue": "60",
+                "options": [
+                    {
+                        "label": "15 Minutes",
+                        "value": "15"
+                    },
+                    {
+                        "label": "30 Minutes",
+                        "value": "30"
+                    },
+                    {
+                        "label": "1 Hour",
+                        "value": "60"
+                    },
+                    {
+                        "label": "90 Minutes",
+                        "value": "90"
+                    },
+                    {
+                        "label": "2 Hours",
+                        "value": "120"
+                    }
+                ]
+            },
+            {
+                "type": "select",
+                "messageKey": "WEATHER_PROVIDER",
+                "label": "Provider",
+                "defaultValue": "3",
+                "options": [
+                    {
+                        "label": "Yahoo!",
+                        "value": "3"
+                    },
+                    {
+                        "label": "OpenWeatherMap",
+                        "value": "0"
+                    },
+                    {
+                        "label": "Weather Underground",
+                        "value": "1"
+                    },
+                    {
+                        "label": "Dark Sky",
+                        "value": "2"
+                    }
+                ]
+            },
+            {
+                "type": "toggle",
+                "messageKey": "USE_GPS",
+                "label": "Use GPS",
+                "defaultValue": true
+            },
+            {
+                "type": "input",
+                "messageKey": "LOCATION_NAME",
+                "label": "Location"
+            },
+            {
+                "type": "input",
+                "messageKey": "WEATHER_KEY",
+                "label": "API Key",
+                "description": "API key for the selected weather provider. You can retrieve your key stored at https://www.pmkey.xyz by filling in the form below"
+            },
+            {
+                "type": "input",
+                "id": "masterKeyEmail",
+                "label": "Master Key Email",
+                "attributes": {
+                    "type": "email"
+                }
+            },
+            {
+                "type": "input",
+                "id": "masterKeyPin",
+                "label": "Master Key Pin",
+                "attributes": {
+                    "type": "number"
+                }
+            },
+            {
+                "type": "button",
+                "id": "masterKeyButton",
+                "defaultValue": "Get Key"
+            },
+            {
+                "type": "text",
+                "id": "masterKeyText"
+            }
+        ]
+    },
+    {
         "type": "submit",
         "defaultValue": "Save"
     }

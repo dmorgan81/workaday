@@ -4,6 +4,7 @@
 #include <pebble-hourly-vibes/hourly-vibes.h>
 #include <lazy-fonts/lazy-fonts.h>
 #include "colors.h"
+#include "weather.h"
 
 #include "time-layer.h"
 #include "top-layer.h"
@@ -67,6 +68,10 @@ static void init(void) {
     hourly_vibes_enable_health(true);
 #endif
 
+#ifndef DEMO
+    weather_init();
+#endif
+
     events_app_message_open();
 
     s_window = window_create();
@@ -80,6 +85,10 @@ static void init(void) {
 static void deinit(void) {
     log_func();
     window_destroy(s_window);
+
+#ifndef DEMO
+    weather_deinit();
+#endif
 
     lazy_fonts_deinit();
     hourly_vibes_deinit();
