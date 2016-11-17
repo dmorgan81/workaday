@@ -145,29 +145,38 @@
                 "description": "API key for the selected weather provider. You can retrieve your key stored at https://www.pmkey.xyz by filling in the form below"
             },
             {
-                "type": "input",
-                "id": "masterKeyEmail",
-                "label": "Master Key Email",
-                "attributes": {
-                    "type": "email"
-                }
-            },
-            {
-                "type": "input",
-                "id": "masterKeyPin",
-                "label": "Master Key Pin",
-                "attributes": {
-                    "type": "number"
-                }
-            },
-            {
-                "type": "button",
-                "id": "masterKeyButton",
-                "defaultValue": "Get Key"
-            },
-            {
-                "type": "text",
-                "id": "masterKeyText"
+                "type": "section",
+                "items": [
+                    {
+                        "type": "heading",
+                        "defaultValue": "Master Key"
+                    },
+                    {
+                        "type": "input",
+                        "id": "masterKeyEmail",
+                        "label": "Master Key Email",
+                        "attributes": {
+                            "type": "email"
+                        }
+                    },
+                    {
+                        "type": "input",
+                        "id": "masterKeyPin",
+                        "label": "Master Key Pin",
+                        "attributes": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "type": "button",
+                        "id": "masterKeyButton",
+                        "defaultValue": "Get Key"
+                    },
+                    {
+                        "type": "text",
+                        "id": "masterKeyText"
+                    }
+                ]
             }
         ]
     },

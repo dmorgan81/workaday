@@ -25,7 +25,7 @@ module.exports = function(minified) {
         masterKeyButton.on('click', function() {
             var email = masterKeyEmail.get();
             var pin = masterKeyPin.get();
-            if (!masterKey && email && pin) {
+            if ((!masterKey || !masterKey.success) && email && pin) {
                 var url = _.format('https://pmkey.xyz/search/?email={{email}}&pin={{pin}}', { email : email, pin : pin });
                 $.request('get', url).then(function(txt, xhr) {
                     masterKey = JSON.parse(txt);
@@ -33,18 +33,20 @@ module.exports = function(minified) {
                         var weather = masterKey.keys.weather;
                         var provider = providers[weatherProvider.get()];
                         weatherKey.set(weather[provider]);
+                        masterKeyText.set('Success');
+                        masterKeyText.show();
                     } else {
                         masterKeyEmail.disable();
                         masterKeyPin.disable();
                         masterKeyButton.disable();
-                        masterKeyText.set('Could not fetch Master Key');
+                        masterKeyText.set(masterKey.error);
                         masterKeyText.show();
                     }
-                }).error(function() {
+                }).error(function(status, txt, xhr) {
                     masterKeyEmail.disable();
                     masterKeyPin.disable();
                     masterKeyButton.disable();
-                    masterKeyText.set('Could not fetch Master Key');
+                    masterKeyText.set(status + ': ' + txt);
                     masterKeyText.show();
                 });
             } else if (masterKey && masterKey.success && masterKey.keys.weather) {
