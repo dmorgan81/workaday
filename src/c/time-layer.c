@@ -45,11 +45,15 @@ static void update_proc(Layer *this, GContext *ctx) {
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed, void *this) {
     log_func();
     Data *data = layer_get_data(this);
+#ifndef DEMO
     if (enamel_get_LEADING_ZERO()) {
         strftime(data->buf, sizeof(data->buf), clock_is_24h_style() ? "%H:%M" : "%I:%M", tick_time);
     } else {
         strftime(data->buf, sizeof(data->buf), clock_is_24h_style() ? "%k:%M" : "%l:%M", tick_time);
     }
+#else
+    snprintf(data->buf, sizeof(data->buf), "12:34");
+#endif
     layer_mark_dirty(this);
 }
 
