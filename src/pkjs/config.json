@@ -170,7 +170,7 @@
                         "id": "masterKeyPin",
                         "label": "Master Key Pin",
                         "attributes": {
-                            "type": "number"
+                            "type": "tel"
                         }
                     },
                     {
