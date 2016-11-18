@@ -58,7 +58,7 @@
           "type": "font",
           "name": "GILROY_LIGHT_18",
           "file": "fonts/Gilroy.ttf",
-          "characterRegex": "[0-9a-zA-Z %.]",
+          "characterRegex": "[0-9a-zA-Z :%.]",
           "targetPlatforms": [
             "aplite",
             "basalt",
@@ -80,7 +80,7 @@
           "type": "font",
           "name": "GILROY_LIGHT_26",
           "file": "fonts/Gilroy.ttf",
-          "characterRegex": "[0-9a-zA-Z %.]",
+          "characterRegex": "[0-9a-zA-Z :%.]",
           "targetPlatforms": [
             "emery"
           ]
@@ -107,6 +107,11 @@
         {
           "file": "data/HEALTH_STEPS.pdc",
           "name": "HEALTH_STEPS",
+          "type": "raw"
+        },
+        {
+          "file": "data/HEALTH_SLEEP.pdc",
+          "name": "HEALTH_SLEEP",
           "type": "raw"
         },
         {

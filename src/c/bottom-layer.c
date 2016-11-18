@@ -5,12 +5,16 @@
 #include "weather-layer.h"
 #ifdef PBL_HEALTH
 #include "step-layer.h"
+#include "sleep-layer.h"
 #endif
 
 typedef struct __attribute__((packed)) {
     WeatherLayer *weather_layer;
 #ifdef PBL_HEALTH
+    bool sleeping;
     StepLayer *step_layer;
+    SleepLayer *sleep_layer;
+    EventHandle health_event_handle;
 #endif
 #if PBL_API_EXISTS(unobstructed_area_service_subscribe)
     EventHandle unobstructed_area_event_handle;
@@ -28,6 +32,22 @@ static void update_proc(Layer *this, GContext *ctx) {
     graphics_draw_line(ctx, GPoint(bounds.size.w / 2, 0), GPoint(bounds.size.w / 2, bounds.size.h));
 #endif
 }
+
+#ifdef PBL_HEALTH
+static void health_event_handler(HealthEventType event, void *this) {
+    log_func();
+    Data *data = layer_get_data(this);
+    if (event == HealthEventSignificantUpdate) {
+        health_event_handler(HealthEventSleepUpdate, this);
+    } else if (event == HealthEventSleepUpdate || (event == HealthEventMovementUpdate && data->sleeping)) {
+        HealthActivityMask mask = health_service_peek_current_activities();
+        bool sleeping = (mask & HealthActivitySleep) || (mask & HealthActivityRestfulSleep);
+        layer_set_hidden(data->step_layer, sleeping);
+        layer_set_hidden(data->sleep_layer, !sleeping);
+        data->sleeping = sleeping;
+    }
+}
+#endif
 
 #if PBL_API_EXISTS(unobstructed_area_service_subscribe)
 static void unobstructed_area_change_handler(AnimationProgress progress, void *this) {
@@ -68,6 +88,16 @@ BottomLayer *bottom_layer_create(GRect frame) {
 #ifdef PBL_HEALTH
     data->step_layer = step_layer_create(GRect(width, 0, width, bounds.size.h));
     layer_add_child(this, data->step_layer);
+
+    data->sleep_layer = sleep_layer_create(GRect(width, 0, width, bounds.size.h));
+    layer_add_child(this, data->sleep_layer);
+
+    HealthActivityMask mask = health_service_peek_current_activities();
+    data->sleeping = (mask & HealthActivitySleep) || (mask & HealthActivityRestfulSleep);
+    layer_set_hidden(data->step_layer, data->sleeping);
+    layer_set_hidden(data->sleep_layer, !data->sleeping);
+
+    data->health_event_handle = events_health_service_events_subscribe(health_event_handler, this);
 #endif
 
 #if PBL_API_EXISTS(unobstructed_area_service_subscribe)
@@ -87,6 +117,8 @@ void bottom_layer_destroy(BottomLayer *this) {
     events_unobstructed_area_service_unsubscribe(data->unobstructed_area_event_handle);
 #endif
 #ifdef PBL_HEALTH
+    events_health_service_events_unsubscribe(data->health_event_handle);
+    sleep_layer_destroy(data->sleep_layer);
     step_layer_destroy(data->step_layer);
 #endif
     weather_layer_destroy(data->weather_layer);
