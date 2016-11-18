@@ -21,7 +21,7 @@
                 "messageKey": "COLOR_INVERT",
                 "label": "Invert Colors",
                 "description": "White on black, or black on white",
-                "defaultValue": true,
+                "defaultValue": false,
                 "capabilities": [ "BW" ]
             },
             {
