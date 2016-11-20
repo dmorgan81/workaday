@@ -12,12 +12,12 @@
     "enamel": "^1.2.4",
     "lazy-fonts": "^1.0.2",
     "pdc-transform": "^2.0.4",
-    "pebble-connection-vibes": "^1.0.2",
+    "pebble-connection-vibes": "^1.0.3",
     "pebble-events": "^1.2.0",
     "pebble-fctx": "^1.6.2",
     "pebble-generic-weather": "file:///home/david/code/pebble/pebble-generic-weather",
     "pebble-geocode-mapquest": "^1.0.2",
-    "pebble-hourly-vibes": "^1.0.2"
+    "pebble-hourly-vibes": "^1.0.3"
   },
   "pebble": {
     "displayName": "Workaday",
