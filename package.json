@@ -50,6 +50,12 @@
     "resources": {
       "media": [
         {
+          "type": "bitmap",
+          "name": "MENU_ICON",
+          "file": "menuicon.png",
+          "menuIcon": true
+        },
+        {
           "type": "raw",
           "name": "GILROY_LIGHT_FFONT",
           "file": "fonts/Gilroy.ffont"
