@@ -83,7 +83,7 @@ BatteryLayer *battery_layer_create(GRect frame) {
     GSize size = gdraw_command_image_get_bounds_size(data->battery_pdc);
     GRect rect = GRect(0, 1, bounds.size.w - size.w - 2, bounds.size.h - 1);
     data->text_layer = text_layer_create(rect);
-    text_layer_set_font(data->text_layer, lazy_fonts_get(PBL_IF_DISPLAY_LARGE_ELSE(RESOURCE_ID_GILROY_LIGHT_26, RESOURCE_ID_GILROY_LIGHT_18)));
+    text_layer_set_font(data->text_layer, lazy_fonts_get(PBL_IF_DISPLAY_LARGE_ELSE(RESOURCE_ID_GILROY_LIGHT_25, RESOURCE_ID_GILROY_LIGHT_18)));
     text_layer_set_background_color(data->text_layer, GColorClear);
     text_layer_set_text_alignment(data->text_layer, GTextAlignmentRight);
     text_layer_set_text(data->text_layer, data->buf);

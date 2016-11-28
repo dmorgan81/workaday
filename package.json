@@ -103,7 +103,7 @@
         },
         {
           "type": "font",
-          "name": "GILROY_LIGHT_26",
+          "name": "GILROY_LIGHT_25",
           "file": "fonts/Gilroy.ttf",
           "characterRegex": "[0-9a-zA-Z :%.]",
           "targetPlatforms": [

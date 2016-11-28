@@ -74,13 +74,13 @@ DateLayer *date_layer_create(GRect frame) {
 
 #ifndef PBL_PLATFORM_APLITE
     data->text_layer = sliding_text_layer_create(GRect(x, 1, bounds.size.w - x, bounds.size.h - 1));
-    sliding_text_layer_set_font(data->text_layer, lazy_fonts_get(PBL_IF_DISPLAY_LARGE_ELSE(RESOURCE_ID_GILROY_LIGHT_26, RESOURCE_ID_GILROY_LIGHT_18)));
+    sliding_text_layer_set_font(data->text_layer, lazy_fonts_get(PBL_IF_DISPLAY_LARGE_ELSE(RESOURCE_ID_GILROY_LIGHT_25, RESOURCE_ID_GILROY_LIGHT_18)));
     sliding_text_layer_set_text(data->text_layer, data->buf_date);
     sliding_text_layer_set_duration(data->text_layer, 500);
     layer_add_child(this, data->text_layer);
 #else
     data->text_layer = text_layer_create(GRect(x, 1, bounds.size.w - x, bounds.size.h - 1));
-    text_layer_set_font(data->text_layer, lazy_fonts_get(PBL_IF_DISPLAY_LARGE_ELSE(RESOURCE_ID_GILROY_LIGHT_26, RESOURCE_ID_GILROY_LIGHT_18)));
+    text_layer_set_font(data->text_layer, lazy_fonts_get(RESOURCE_ID_GILROY_LIGHT_18));
     text_layer_set_text(data->text_layer, data->buf_date);
     text_layer_set_text_alignment(data->text_layer, GTextAlignmentCenter);
     text_layer_set_background_color(data->text_layer, GColorClear);
