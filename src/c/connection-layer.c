@@ -19,6 +19,7 @@ typedef struct {
 
 static void update_proc(Layer *this, GContext *ctx) {
     log_func();
+    if (quiet_time_is_active()) return;
     Data *data = layer_get_data(this);
     graphics_context_set_stroke_color(ctx, colors_get_foreground_color());
     gpath_draw_outline(ctx, data->gpath);
