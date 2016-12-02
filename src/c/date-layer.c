@@ -26,7 +26,7 @@ typedef struct __attribute__((packed)) {
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed, void *context) {
     log_func();
     Data *data = layer_get_data(context);
-    strftime(data->buf_date, sizeof(data->buf_date), "%b %d", tick_time);
+    strftime(data->buf_date, sizeof(data->buf_date), tick_time->tm_mday < 10 ? "%b%e" : "%b %d", tick_time);
 #ifndef PBL_PLATFORM_APLITE
     strftime(data->buf_wday, sizeof(data->buf_wday), "%a", tick_time);
 #endif

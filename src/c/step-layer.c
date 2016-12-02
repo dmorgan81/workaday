@@ -194,7 +194,7 @@ StepLayer *step_layer_create(GRect frame) {
 #endif
 
     GSize size = gdraw_command_image_get_bounds_size(data->steps_pdc);
-    GRect rect = GRect(0, 3, bounds.size.w - size.w - 2, PBL_IF_DISPLAY_LARGE_ELSE(26, 18));
+    GRect rect = GRect(0, 3, bounds.size.w - size.w, PBL_IF_DISPLAY_LARGE_ELSE(26, 18));
     data->text_layer = sliding_text_layer_create(rect);
     sliding_text_layer_set_font(data->text_layer, lazy_fonts_get(PBL_IF_DISPLAY_LARGE_ELSE(RESOURCE_ID_GILROY_LIGHT_25, RESOURCE_ID_GILROY_LIGHT_18)));
     sliding_text_layer_set_text_alignment(data->text_layer, GTextAlignmentRight);
