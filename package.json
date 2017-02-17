@@ -1,7 +1,7 @@
 {
   "name": "workaday",
   "author": "David Morgan",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "license": "MIT",
   "keywords": [
     "pebble-app"
@@ -132,11 +132,6 @@
         {
           "file": "data/HEALTH_STEPS.pdc",
           "name": "HEALTH_STEPS",
-          "type": "raw"
-        },
-        {
-          "file": "data/HEALTH_SLEEP.pdc",
-          "name": "HEALTH_SLEEP",
           "type": "raw"
         },
         {
