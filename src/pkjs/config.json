@@ -9,6 +9,13 @@
                 "defaultValue": true
             },
             {
+                "type": "toggle",
+                "messageKey": "SHOW_SECONDS",
+                "label": "Show Seconds",
+                "description": "Will increase battery drain",
+                "defaultValue": false
+            },
+            {
                 "type": "color",
                 "messageKey": "COLOR_BACKGROUND",
                 "label": "Background",

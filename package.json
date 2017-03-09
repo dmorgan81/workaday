@@ -45,7 +45,8 @@
       "WEATHER_INTERVAL",
       "WEATHER_PROVIDER",
       "USE_GPS",
-      "LOCATION_NAME"
+      "LOCATION_NAME",
+      "SHOW_SECONDS"
     ],
     "resources": {
       "media": [
