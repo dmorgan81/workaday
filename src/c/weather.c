@@ -34,7 +34,7 @@ static AppTimer *s_resend_timer;
 static uint16_t s_interval;
 #ifndef PBL_PLATFORM_APLITE
 static EventHandle s_geocode_event_handle;
-static char s_location_name[32];
+static char s_location_name[GEOCODE_MAPQUEST_MAX_LOCATION_LEN];
 #endif
 
 static bool each_weather_fetched(void *this, void *context) {

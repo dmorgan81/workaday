@@ -32,7 +32,7 @@ module.exports = function(minified) {
                     if (masterKey.success && masterKey.keys.weather) {
                         var weather = masterKey.keys.weather;
                         var provider = providers[weatherProvider.get()];
-                        weatherKey.set(weather[provider]);
+                        if (provider) weatherKey.set(weather[provider]);
                         masterKeyText.set('Success');
                         masterKeyText.show();
                     } else {
