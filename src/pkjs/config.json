@@ -16,6 +16,26 @@
                 "defaultValue": false
             },
             {
+                "type": "select",
+                "messageKey": "DATE_FORMAT",
+                "label": "Date Format",
+                "defaultValue": "",
+                "options": [
+                    {
+                        "label": "Jan 5",
+                        "value": ""
+                    },
+                    {
+                        "label": "01/05",
+                        "value": "%m/%d"
+                    },
+                    {
+                        "label": "05/01",
+                        "value": "%d/%m"
+                    }
+                ]
+            },
+            {
                 "type": "color",
                 "messageKey": "COLOR_BACKGROUND",
                 "label": "Background",

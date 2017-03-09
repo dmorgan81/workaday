@@ -26,7 +26,12 @@ typedef struct __attribute__((packed)) {
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed, void *context) {
     log_func();
     Data *data = layer_get_data(context);
-    strftime(data->buf_date, sizeof(data->buf_date), tick_time->tm_mday < 10 ? "%b%e" : "%b %d", tick_time);
+    const char *format = enamel_get_DATE_FORMAT();
+    if (strlen(format) == 0) {
+        strftime(data->buf_date, sizeof(data->buf_date), tick_time->tm_mday < 10 ? "%b%e" : "%b %d", tick_time);
+    } else {
+        strftime(data->buf_date, sizeof(data->buf_date), format, tick_time);
+    }
 #ifndef PBL_PLATFORM_APLITE
     strftime(data->buf_wday, sizeof(data->buf_wday), "%a", tick_time);
 #endif
@@ -63,6 +68,9 @@ static void settings_handler(void *context) {
 #else
     text_layer_set_text_color(data->text_layer, colors_get_foreground_color());
 #endif
+
+    time_t now = time(NULL);
+    tick_handler(localtime(&now), DAY_UNIT, context);
 }
 
 DateLayer *date_layer_create(GRect frame) {
