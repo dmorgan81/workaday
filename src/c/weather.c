@@ -138,7 +138,7 @@ static void health_event_handler(HealthEventType event, void *context) {
         health_event_handler(HealthEventSleepUpdate, context);
     } else if (event == HealthEventSleepUpdate || (event == HealthEventMovementUpdate && s_sleeping)) {
         HealthActivityMask activities = health_service_peek_current_activities();
-        s_sleeping = (activities & HealthActivitySleep) || (activities & HealthActivityRestfulSleep);
+        s_sleeping = ((activities & HealthActivitySleep) || (activities & HealthActivityRestfulSleep)) && event != HealthEventMovementUpdate;
         if (!s_sleeping && s_connected) {
             GenericWeatherInfo *info = generic_weather_peek();
             time_t now = time(NULL);
